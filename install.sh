@@ -1,3 +1,6 @@
+#!/usr/bin/bash
+
+
 echo "deb http://mirror.nus.edu.sg/raspbian/raspbian main contrib non-free rpi" >> /etc/apt/sources.list
 echo "deb http://ftp.tsukuba.wide.ad.jp/Linux/raspbian/raspbian/ main contrib non-free rpi" >> /etc/apt/sources.list
 echo "deb http://mirror.labkom.id/raspbian/ main contrib non-free rpi" >> /etc/apt/sources.list
