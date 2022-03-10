@@ -79,3 +79,4 @@ echo "Exec=/home/pi/kerberossdr/run.sh" >> /etc/xdg/autostart/kerberos.desktop
     
     
     
+    
