@@ -1,3 +1,6 @@
+echo "deb http://mirror.nus.edu.sg/raspbian/raspbian main contrib non-free rpi" >> /etc/apt/sources.list
+echo "deb http://ftp.tsukuba.wide.ad.jp/Linux/raspbian/raspbian/ main contrib non-free rpi" >> /etc/apt/sources.list
+echo "deb http://mirror.labkom.id/raspbian/ main contrib non-free rpi" >> /etc/apt/sources.list
 
 apt update -y
 apt upgrade -y
@@ -30,5 +33,46 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee – append /etc/modprobe.d/blacklis
 cd /home/pi
 git clone https://github.com/rtlsdrblog/kerberossdr
 cd kerberossdr
-sh setup_init.sh
 
+echo "Compile C files"
+(cd _receiver/C && make)
+
+echo "[ INFO ] Set file executation rights"
+chmod a+x _receiver/C/rtl_daq
+chmod a+x _receiver/C/sim
+chmod a+x _receiver/C/sync
+chmod a+x _receiver/C/gate
+
+chmod +x run.sh
+chmod +x kill.sh
+chmod +x sim.sh
+
+mkdir -p /ram
+
+ln -sf /ram/pr.jpg _webDisplay/pr.jpg
+ln -sf /ram/DOA_value.html _webDisplay/DOA_value.html
+ln -sf /ram/spectrum.jpg _webDisplay/spectrum.jpg
+ln -sf /ram/sync.jpg _webDisplay/sync.jpg
+ln -sf /ram/doa.jpg _webDisplay/doa.jpg
+ln -sf /ram/pr.jpg _webDisplay/pr.jpg
+
+chmod 777 _receiver
+chmod 777 _GUI
+chmod 777 _signalProcessing
+chmod 777 _dataFiles
+chmod 777 _webDisplay
+chmod 777 static
+chmod 777 views
+
+
+cd /home/pi/temp
+wget https://download.anydesk.com/rpi/anydesk_6.1.1-1_armhf.deb
+apt install anydesk* -y
+
+echo "[Desktop Entry]" >> /etc/xdg/autostart/kerberos.desktop
+echo "Name=Kerberos" >> /etc/xdg/autostart/kerberos.desktop
+echo "Exec=/home/pi/kerberossdr/run.sh" >> /etc/xdg/autostart/kerberos.desktop
+    
+    
+    
+    
