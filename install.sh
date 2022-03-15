@@ -59,14 +59,6 @@ ln -sf /ram/sync.jpg _webDisplay/sync.jpg
 ln -sf /ram/doa.jpg _webDisplay/doa.jpg
 ln -sf /ram/pr.jpg _webDisplay/pr.jpg
 
-chmod 777 _receiver
-chmod 777 _GUI
-chmod 777 _signalProcessing
-chmod 777 _dataFiles
-chmod 777 _webDisplay
-chmod 777 static
-chmod 777 views
-
 
 cd /home/pi/temp
 wget https://download.anydesk.com/rpi/anydesk_6.1.1-1_armhf.deb
