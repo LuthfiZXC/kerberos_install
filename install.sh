@@ -36,28 +36,7 @@ echo 'blacklist dvb_usb_rtl28xxu' | sudo tee – append /etc/modprobe.d/blacklis
 cd /home/pi
 git clone https://github.com/rtlsdrblog/kerberossdr
 cd kerberossdr
-
-echo "Compile C files"
-(cd _receiver/C && make)
-
-echo "[ INFO ] Set file executation rights"
-chmod a+x _receiver/C/rtl_daq
-chmod a+x _receiver/C/sim
-chmod a+x _receiver/C/sync
-chmod a+x _receiver/C/gate
-
-chmod +x run.sh
-chmod +x kill.sh
-chmod +x sim.sh
-
-mkdir -p /ram
-
-ln -sf /ram/pr.jpg _webDisplay/pr.jpg
-ln -sf /ram/DOA_value.html _webDisplay/DOA_value.html
-ln -sf /ram/spectrum.jpg _webDisplay/spectrum.jpg
-ln -sf /ram/sync.jpg _webDisplay/sync.jpg
-ln -sf /ram/doa.jpg _webDisplay/doa.jpg
-ln -sf /ram/pr.jpg _webDisplay/pr.jpg
+bash setup_init.sh
 
 echo "#!/usr/bin/bash" >> /home/pi/start.sh
 echo "cd kerberossdr && sudo bash run.sh" >> /home/pi/start.sh
@@ -66,7 +45,6 @@ chmod +x /home/pi/start.sh
 echo "[Desktop Entry]" >> /etc/xdg/autostart/kerberos.desktop
 echo "Name=Kerberos" >> /etc/xdg/autostart/kerberos.desktop
 echo "Exec=/home/pi/start.sh" >> /etc/xdg/autostart/kerberos.desktop
-
 
 
 
