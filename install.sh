@@ -59,16 +59,17 @@ ln -sf /ram/sync.jpg _webDisplay/sync.jpg
 ln -sf /ram/doa.jpg _webDisplay/doa.jpg
 ln -sf /ram/pr.jpg _webDisplay/pr.jpg
 
-
-cd /home/pi/temp
-wget https://download.anydesk.com/rpi/anydesk_6.1.1-1_armhf.deb
-apt install anydesk* -y
+echo "#!/usr/bin/bash" >> /home/pi/start.sh
+echo "cd kerberossdr && sudo bash run.sh" >> /home/pi/start.sh
+chmod +x /home/pi/start.sh
 
 echo "[Desktop Entry]" >> /etc/xdg/autostart/kerberos.desktop
 echo "Name=Kerberos" >> /etc/xdg/autostart/kerberos.desktop
-echo "Exec=/home/pi/kerberossdr/run.sh" >> /etc/xdg/autostart/kerberos.desktop
-    
-    
+echo "Exec=/home/pi/start.sh" >> /etc/xdg/autostart/kerberos.desktop
+
+
+
+
     
     
     
